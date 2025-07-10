@@ -10,8 +10,6 @@ app.use("/api/users", userRoute);
 
 setupSwagger(app);
 
-app.get("/", (req, res) => {
-  res.send("API fonctionne !");
-});
+app.get("/", (req, res) => {});
 
 module.exports = app;
