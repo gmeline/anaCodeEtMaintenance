@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: node_crud_app
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/crudbdd
+    depends_on:
+      - mongo
+    command: npm run dev
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo_crud
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: crudbdd
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
