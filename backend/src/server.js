@@ -1,24 +1,20 @@
-// server.js
 const express = require("express");
 const app = express();
 const port = 3000;
+const setupSwagger = require("./config/swagger");
 
-// Middleware pour parser le JSON
+// Middleware JSON (utile pour API REST)
 app.use(express.json());
 
-// Exemple de route GET
+// Route racine simple
 app.get("/", (req, res) => {
-  res.send("Bienvenue sur le serveur Node.js avec Express !");
+    res.send("Hello World!");
 });
 
-// Exemple de route POST
-app.post("/api/data", (req, res) => {
-  const data = req.body;
-  console.log("Données reçues :", data);
-  res.json({ message: "Données reçues avec succès", data });
-});
+// Setup Swagger
+setupSwagger(app);
 
-// Lancement du serveur
 app.listen(port, () => {
-  console.log(`🚀 Serveur démarré sur http://localhost:${port}`);
+    console.log(`Serveur démarré sur http://localhost:${port}`);
+    console.log(`Swagger UI disponible sur http://localhost:${port}/swagger`);
 });

@@ -2,8 +2,12 @@ version: "3.8"
 
 services:
   app:
-    build: .
-    container_name: node_crud_app
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/usr/src/app
+    working_dir: /usr/src/app
     ports:
       - "3000:3000"
     environment:
@@ -12,9 +16,6 @@ services:
     depends_on:
       - mongo
     command: npm run dev
-    volumes:
-      - .:/usr/src/app
-    working_dir: /usr/src/app
 
   mongo:
     image: mongo:latest
